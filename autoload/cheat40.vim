@@ -19,16 +19,23 @@ function! s:split(path) abort
 endfunction
 
 fun! cheat40#open(newtab)
+   " 加入中文备忘单文件 cheat40cn.txt
+   if v:lang=="zh_CN.utf-8"
+      let cheatlang="cheat40cn.txt"
+   else
+      let cheatlang="cheat40.txt"
+   endif
+
   if a:newtab
     tabnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
   else
     botright 40vnew +setlocal\ buftype=nofile\ bufhidden=hide\ nobuflisted\ noswapfile\ winfixwidth
   endif
   if get(g:, 'cheat40_use_default', 1)
-    execute '$read' s:cheat40_dir.s:slash().'cheat40.txt'
+    execute '$read' s:cheat40_dir.s:slash().cheatlang
   endif
   for glob in reverse(s:split(&runtimepath))
-    for cs in filter(map(filter(split(glob(glob), "\n"), 'v:val !~ "cheat40"'), 'v:val.s:slash()."cheat40.txt"'), 'filereadable(v:val)')
+    for cs in filter(map(filter(split(glob(glob), "\n"), 'v:val !~ "cheat40"'), 'v:val.s:slash().cheatlang'), 'filereadable(v:val)')
       execute "$read" cs
     endfor
   endfor
