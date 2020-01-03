@@ -266,7 +266,8 @@ Toggle soft-wrapping     :setl wrap!   N
 切换行号                 :setl nu!     N
 切换相对. 行号           :setl rnu!    N
 切换隐形Tab空格拖尾空白  :setl list!   N
-折叠                     zc           *N
+创建折叠                 zf           *N
+关闭折叠                 zc           *N
 展开折叠                 zv           *N
 切换折叠                 za           *N
 全部折叠                 zM            N
